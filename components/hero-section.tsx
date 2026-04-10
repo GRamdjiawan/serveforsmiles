@@ -214,7 +214,7 @@ export default function HeroSection() {
                 el.style.boxShadow = "0 0 28px rgba(203,255,0,0.45), 0 4px 14px rgba(203,255,0,0.22)"
               }}
             >
-              Register now ↗
+              Register now
             </a>
           </div>
         </div>
