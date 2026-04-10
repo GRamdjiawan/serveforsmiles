@@ -176,7 +176,7 @@ export default function FooterSection() {
             margin: 0,
           }}
         >
-          &copy; 2025 Serve for Smiles
+          &copy; 2026 Serve for Smiles
         </p>
       </div>
     </footer>
