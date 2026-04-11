@@ -17,10 +17,10 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'Serve for Smiles — Padel & Network Event · June 13, Rotterdam',
+  title: 'Serve for Smiles',
   description:
-    'Serve for Smiles brings padel, music and community together in one place. Not a standard tournament — a day where you win, celebrate and meet new people. June 13 · Maashaven 42, Rotterdam.',
-  generator: 'v0.app',
+    'Serve for Smiles brings padel, music and community together in one place. Not a standard tournament a day where you win, celebrate and meet new people. June 13 · Maashaven 42, Rotterdam.',
+  
 }
 
 export default function RootLayout({
