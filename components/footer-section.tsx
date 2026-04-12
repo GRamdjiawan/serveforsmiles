@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 export default function FooterSection() {
   return (
     <footer
@@ -29,7 +31,7 @@ export default function FooterSection() {
           .footer-inner {
             display: flex !important;
             justify-content: space-between !important;
-            align-items: flex-start !important;
+            align-items: center !important;
             padding: 48px clamp(48px, 8vw, 120px) !important;
             text-align: left !important;
           }
@@ -46,22 +48,47 @@ export default function FooterSection() {
       `}</style>
 
       <div className="footer-inner">
-        {/* Brand */}
-        <div className="footer-mobile-center">
-          <p
-            style={{
-              fontFamily: "var(--font-display)",
-              fontStyle: "italic",
-              fontWeight: 700,
-              fontSize: "clamp(20px, 3vw, 22px)",
-              color: "#CBFF00",
-              margin: 0,
-            }}
-          >
-            Serve for Smiles
-          </p>
 
-          {/* Date — visible on mobile only */}
+        {/* Brand + logo */}
+        <div className="footer-mobile-center">
+          <div style={{ display: "flex", alignItems: "center", gap: "14px", justifyContent: "center", marginBottom: "12px" }}>
+            <style>{`
+              @media (min-width: 1024px) {
+                .footer-brand-row { justify-content: flex-start !important; }
+              }
+              .footer-logo {
+                width: 64px;
+                height: 64px;
+              }
+              @media (min-width: 1024px) {
+                .footer-logo {
+                  width: 120px;
+                  height: 120px;
+                }
+              }
+            `}</style>
+            <Image
+              src="/logo.png"
+              alt="Serve for Smiles"
+              width={120}
+              height={120}
+              className="footer-brand-row footer-logo"
+            />
+            <p
+              style={{
+                fontFamily: "var(--font-display)",
+                fontStyle: "italic",
+                fontWeight: 700,
+                fontSize: "clamp(20px, 3vw, 22px)",
+                color: "#CBFF00",
+                margin: 0,
+              }}
+            >
+              Serve for Smiles
+            </p>
+          </div>
+
+          {/* Date — mobile only */}
           <p
             className="footer-date-mobile"
             style={{
@@ -69,18 +96,15 @@ export default function FooterSection() {
               fontWeight: 400,
               fontSize: "11px",
               color: "rgba(255,255,255,0.42)",
-              marginTop: "12px",
+              marginTop: "4px",
               marginBottom: "16px",
             }}
           >
             13 June · Rotterdam
           </p>
 
-          {/* Socials — mobile below brand */}
-          <div
-            className="footer-socials-mobile"
-            style={{ marginTop: "14px" }}
-          >
+          {/* Socials — mobile */}
+          <div className="footer-socials-mobile" style={{ marginTop: "14px" }}>
             <style>{`
               @media (min-width: 1024px) {
                 .footer-socials-mobile { display: none !important; }
@@ -154,6 +178,7 @@ export default function FooterSection() {
             In collaboration with Padel × House Fest
           </p>
         </div>
+
       </div>
 
       {/* Bottom rule + copyright */}

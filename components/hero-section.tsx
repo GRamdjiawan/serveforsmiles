@@ -8,6 +8,7 @@ export default function HeroSection() {
   const line2Ref = useRef<HTMLSpanElement>(null)
   const badgeRef = useRef<HTMLDivElement>(null)
   const ctaRef = useRef<HTMLDivElement>(null)
+  const bgRef = useRef<HTMLImageElement>(null)
 
   useEffect(() => {
     const simpleItems: Array<{ el: HTMLElement | null; delay: number }> = [
@@ -70,6 +71,19 @@ export default function HeroSection() {
         }, 700)
       }, stretchDelay)
     }
+  }, [])
+
+  useEffect(() => {
+    const scrollEl = document.querySelector("main") as HTMLElement | null
+    if (!scrollEl || !bgRef.current) return
+
+    const onScroll = () => {
+      if (!bgRef.current) return
+      bgRef.current.style.transform = `translateY(${scrollEl.scrollTop * 0.3}px)`
+    }
+
+    scrollEl.addEventListener("scroll", onScroll, { passive: true })
+    return () => scrollEl.removeEventListener("scroll", onScroll)
   }, [])
 
   const wrapWords = (text: string) =>
@@ -223,18 +237,27 @@ export default function HeroSection() {
           position: "relative",
           height: "100svh",
           width: "100%",
-          backgroundImage: `url('${imgUrl}')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
           overflow: "hidden",
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
+          ref={bgRef}
           src={imgUrl}
-          alt="Padel court - Serve for Smiles event"
+          alt=""
+          aria-hidden="true"
           loading="eager"
-          style={{ display: "none" }}
+          style={{
+            position: "absolute",
+            top: "-15%",
+            left: 0,
+            width: "100%",
+            height: "130%",
+            objectFit: "cover",
+            objectPosition: "center",
+            willChange: "transform",
+            pointerEvents: "none",
+          }}
         />
 
         <div

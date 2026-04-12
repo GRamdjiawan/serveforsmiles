@@ -1,82 +1,123 @@
 "use client"
 
 import { useEffect, useRef } from "react"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+
+gsap.registerPlugin(ScrollTrigger)
 
 export default function AboutSection() {
+  const leftRef  = useRef<HTMLDivElement>(null)
+  const rightRef = useRef<HTMLDivElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    const el = sectionRef.current
-    if (!el) return
+    const left  = leftRef.current
+    const right = rightRef.current
+    const section = sectionRef.current
+    if (!left || !right || !section) return
 
-    el.style.opacity = "0"
-    el.style.transform = "translateY(12px)"
+    // Scroll container is <main>, not window
+    const scroller = document.querySelector("main") as HTMLElement | null
+    if (!scroller) return
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            el.style.transition = "opacity 500ms ease-out, transform 500ms ease-out"
-            el.style.opacity = "1"
-            el.style.transform = "translateY(0)"
-            observer.disconnect()
-          }
-        })
-      },
-      { threshold: 0.2 }
+    // Respect reduced-motion preference
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+
+    ScrollTrigger.defaults({ scroller })
+
+    // Left column — slides in from the left, scrubbed to scroll position
+    const leftTween = gsap.fromTo(
+      left,
+      { x: -64, opacity: 0 },
+      {
+        x: 0,
+        opacity: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: section,
+          scroller,
+          start: "top 88%",
+          end:   "top 38%",
+          scrub: 1.4,
+        },
+      }
     )
-    observer.observe(el)
-    return () => observer.disconnect()
+
+    // Right column — slides in from the right, slightly delayed start
+    const rightTween = gsap.fromTo(
+      right,
+      { x: 64, opacity: 0 },
+      {
+        x: 0,
+        opacity: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: section,
+          scroller,
+          start: "top 82%",
+          end:   "top 32%",
+          scrub: 1.4,
+        },
+      }
+    )
+
+    return () => {
+      leftTween.scrollTrigger?.kill()
+      rightTween.scrollTrigger?.kill()
+      ScrollTrigger.getAll().forEach((st) => st.kill())
+    }
   }, [])
 
   return (
     <>
       <style>{`
-        .about-inner {
+        .about-wrap {
           width: 100%;
-          padding: clamp(48px, 10vw, 80px) 28px clamp(56px, 10vw, 80px);
-          position: relative;
+          padding: clamp(52px, 10vw, 84px) 28px clamp(64px, 10vw, 96px);
         }
+
         .about-grid {
-          display: block;
+          display: flex;
+          flex-direction: column;
+          gap: 40px;
         }
-        .about-left {}
-        .about-right {
-          margin-top: 24px;
-        }
-        /* Mobile: body/meta visible below left col */
-        .about-body-mobile {
-          display: block;
-        }
-        .about-body-desktop {
-          display: none;
-        }
+
         @media (min-width: 1024px) {
-          .about-inner {
-            padding: clamp(64px, 8vw, 96px) clamp(48px, 8vw, 120px);
+          .about-wrap {
+            padding: clamp(72px, 8vw, 100px) clamp(48px, 8vw, 120px);
           }
           .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: clamp(60px, 6vw, 100px);
+            gap: clamp(48px, 6vw, 80px);
             align-items: start;
           }
-          .about-right {
-            margin-top: 0;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
+        }
+
+        .link-effect-green {
+          background: linear-gradient(rgba(26,31,46,1), rgba(26,31,46,1)) no-repeat left center;
+          background-size: 0% 100%;
+          transition: background-size 480ms cubic-bezier(0.22, 1, 0.36, 1),
+                      color 80ms ease;
+          padding: 0 2px;
+          border-radius: 2px;
+          text-decoration: underline;
+        }
+        .link-effect-green:hover {
+          background-size: 100% 100%;
+          color: #CBFF00 !important;
+          transition: background-size 480ms cubic-bezier(0.22, 1, 0.36, 1),
+                      color 100ms ease 150ms;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .about-grid > * {
+            opacity: 1 !important;
+            transform: none !important;
           }
-          .about-meta {
-            margin-top: auto;
-          }
-          .about-body-mobile {
-            display: none;
-          }
-          .about-body-desktop {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
+          .link-effect-green {
+            transition: none !important;
           }
         }
       `}</style>
@@ -86,139 +127,123 @@ export default function AboutSection() {
         aria-label="About"
         style={{ background: "#F7F8F3", width: "100%", maxWidth: "100%" }}
       >
-        <div className="about-inner">
+        <div className="about-wrap">
+
+          <div style={{ height: "1px", background: "#E5E7EB", marginBottom: "clamp(28px, 4vw, 44px)" }} />
+
           <div className="about-grid">
 
-            {/* Left column */}
-            <div className="about-left">
-              {/* Top rule */}
-              <div style={{ height: "1px", background: "#E5E7EB", marginBottom: "24px" }} />
+            {/* ── LEFT: Headline ── */}
+            <div ref={leftRef}>
 
-              {/* Neon dot accent */}
-              <span
-                aria-hidden="true"
-                style={{
-                  display: "inline-block",
-                  width: "10px",
-                  height: "10px",
-                  borderRadius: "50%",
-                  background: "#CBFF00",
-                  float: "right",
-                }}
-              />
-
-              {/* Label */}
-              {/* <div
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontWeight: 500,
-                  fontSize: "9.5px",
-                  color: "#CBFF00",
-                  letterSpacing: "0.25em",
-                  textTransform: "uppercase",
-                  marginBottom: "20px",
-                }}
-              >
-                THE CONCEPT
-              </div> */}
-
-              {/* Headline */}
-              <h2
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontStyle: "italic",
-                  fontWeight: 700,
-                  fontSize: "clamp(34px, 9vw, 52px)",
-                  color: "#1A1F2E",
-                  lineHeight: 1.1,
-                  margin: 0,
-                }}
-              >
+              <h2 style={{
+                fontFamily: "var(--font-display)",
+                fontStyle: "italic",
+                fontWeight: 700,
+                fontSize: "clamp(36px, 8vw, 56px)",
+                color: "#1A1F2E",
+                lineHeight: 1.08,
+                margin: 0,
+              }}>
                 More than
                 <br />
-                a tournament.
+                just balls.
               </h2>
 
-              {/* Neon bar */}
-              <div
-                style={{
-                  width: "48px",
-                  height: "3px",
-                  background: "#CBFF00",
-                  borderRadius: "100px",
-                  margin: "16px 0 0",
-                }}
-              />
+              <div style={{
+                width: "48px",
+                height: "3px",
+                background: "#CBFF00",
+                borderRadius: "100px",
+                margin: "18px 0 16px",
+              }} />
 
-              {/* Body content — only shown on mobile inside left col */}
-              <div className="about-body-mobile">
-                <p
-                  style={{
-                    fontFamily: "var(--font-body)",
-                    fontWeight: 400,
-                    fontSize: "15px",
-                    lineHeight: 1.75,
-                    color: "#6B7280",
-                    margin: "24px 0 0",
-                  }}
-                >
-                  Serve for Smiles brings padel, music and community together in one place.
-                  Not a standard tournament — a day where you win, celebrate and meet new people.
-                </p>
-                <div style={{ height: "1px", background: "#E5E7EB", margin: "32px 0 20px" }} />
-                <div
-                  style={{
-                    fontFamily: "var(--font-body)",
-                    fontWeight: 700,
-                    fontSize: "11px",
-                    color: "rgba(26,31,46,0.85)",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.05em",
-                  }}
-                >
-                  13 JUNE{" "}
-                  <span style={{ color: "#CBFF00" }}>·</span>{" "}
-                  ROTTERDAM{" "}
-                  <span style={{ color: "#CBFF00" }}>·</span>{" "}
-                  PADEL &amp; NETWORK
-                </div>
-              </div>
-            </div>
-
-            {/* Right column — desktop only */}
-            <div className="about-body-desktop">
-              <p
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontWeight: 400,
-                  fontSize: "15px",
-                  lineHeight: 1.75,
-                  color: "#6B7280",
-                  margin: 0,
-                }}
-              >
-                Serve for Smiles brings padel, music and community together in one place.
-                Not a standard tournament — a day where you win, celebrate and meet new people.
+              <p style={{
+                fontFamily: "var(--font-display)",
+                fontStyle: "italic",
+                fontWeight: 700,
+                fontSize: "clamp(15px, 2.2vw, 18px)",
+                color: "rgba(26,31,46,0.48)",
+                margin: "0 0 36px",
+                lineHeight: 1.4,
+              }}>
+                Let&rsquo;s serve smiles.
               </p>
-              <div style={{ height: "1px", background: "#E5E7EB", margin: "32px 0 20px" }} />
-              <div
-                className="about-meta"
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontWeight: 700,
-                  fontSize: "11px",
-                  color: "rgba(26,31,46,0.85)",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.05em",
-                  marginTop: "auto",
-                }}
-              >
+
+              <div style={{
+                fontFamily: "var(--font-body)",
+                fontWeight: 700,
+                fontSize: "11px",
+                color: "rgba(26,31,46,0.80)",
+                textTransform: "uppercase",
+                letterSpacing: "0.08em",
+              }}>
                 13 JUNE{" "}
                 <span style={{ color: "#CBFF00" }}>·</span>{" "}
                 ROTTERDAM{" "}
                 <span style={{ color: "#CBFF00" }}>·</span>{" "}
                 PADEL &amp; NETWORK
               </div>
+            </div>
+
+            {/* ── RIGHT: Body ── */}
+            <div ref={rightRef}>
+              <div style={{ height: "3px", background: "#CBFF00", marginBottom: "28px" }} />
+
+              <p style={{
+                fontFamily: "var(--font-body)",
+                fontWeight: 400,
+                fontSize: "15px",
+                lineHeight: 1.78,
+                color: "#6B7280",
+                margin: "0 0 20px",
+              }}>
+                Serve for Smiles started from a simple idea: sport can connect people and create real
+                impact. Together with{" "}
+                <br/> 
+                 <strong style={{ color: "rgba(26,31,46,0.85)", fontWeight: 600 }}>
+                  <a href="https://collectivevents.nl/" target="_blank" rel="noopener noreferrer" className="link-effect-green">
+                    Padel x Housefest
+                  </a>
+                </strong>
+                 {""}, we&rsquo;re organising a unique padel event
+                where sport, music, community and purpose all come together in one place.
+              </p>
+
+              <p style={{
+                fontFamily: "var(--font-body)",
+                fontWeight: 400,
+                fontSize: "15px",
+                lineHeight: 1.78,
+                color: "#6B7280",
+                margin: "0 0 20px",
+              }}>
+                It&rsquo;s not just about matches on the court. Think a full day of padel, great music,
+                meaningful connections, good food and drinks an atmosphere where people come
+                together and create something special.
+              </p>
+
+              <p style={{
+                fontFamily: "var(--font-body)",
+                fontWeight: 400,
+                fontSize: "15px",
+                lineHeight: 1.78,
+                color: "#6B7280",
+                margin: "0 0 28px",
+              }}>
+                Behind every smile, there&rsquo;s a bigger goal. We play for{" "}
+                <strong style={{ color: "rgba(26,31,46,0.85)", fontWeight: 600 }}>
+                  <a href="https://stichtingjarigejob.nl/" target="_blank" rel="noopener noreferrer" className="link-effect-green">
+                    Stichting Jarige Job
+                  </a>
+                </strong>
+                {" "}a foundation that ensures children in the Netherlands who can&rsquo;t afford a
+                birthday celebration still get to experience one. Through special birthday boxes filled
+                with treats, decorations and gifts, Jarige Job makes sure thousands of kids get a
+                birthday they&rsquo;ll never forget. Because every child deserves that.
+              </p>
+
+              <div style={{ height: "3px", background: "#CBFF00" }} />
             </div>
 
           </div>

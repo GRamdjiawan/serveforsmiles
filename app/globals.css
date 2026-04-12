@@ -4,7 +4,7 @@
 /* ── Serve for Smiles design tokens ── */
 :root {
   --sfs-accent: #CBFF00;
-  --sfs-dark: #1A1F2E;
+  --sfs-dark: #1a1f2e;
   --sfs-cream: #F7F8F3;
   --sfs-muted: #6B7280;
   --sfs-white: #FFFFFF;
@@ -41,6 +41,11 @@ section, footer {
   width: 100%;
   max-width: 100%;
 }
+
+/* .link-effect-green:hover {
+  color: var(--sfs-accent);
+  background-color: var(--sfs-dark);
+} */
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
