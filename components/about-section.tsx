@@ -147,7 +147,7 @@ export default function AboutSection() {
               }}>
                 More than
                 <br />
-                just balls.
+                a tournament.
               </h2>
 
               <div style={{
