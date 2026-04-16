@@ -114,21 +114,42 @@ export default function HeroSection() {
           100% { box-shadow: 0 0 28px rgba(203,255,0,0.45), 0 4px 14px rgba(203,255,0,0.22); }
         }
 
+        // .sfs-btn {
+        //   position: relative;
+        //   display: block;
+        //   width: 100%;
+        //   max-width: 260px;
+        //   height: 54px;
+        //   background: #CBFF00;
+        //   border: none;
+        //   border-radius: 100px;
+        //   color: #1A1F2E;
+        //   font-family: var(--font-body);
+        //   font-weight: 700;
+        //   font-size: 15px;
+        //   cursor: pointer;
+        //   box-shadow: 0 0 28px rgba(203,255,0,0.45), 0 4px 14px rgba(203,255,0,0.22);
+        //   transition: transform 150ms ease-out, box-shadow 150ms ease-out;
+        //   overflow: hidden;
+        //   text-align: center;
+        //   line-height: 54px;
+        // }
+
         .sfs-btn {
           position: relative;
           display: block;
           width: 100%;
           max-width: 260px;
           height: 54px;
-          background: #CBFF00;
+          background: #344100;
           border: none;
           border-radius: 100px;
-          color: #1A1F2E;
+          color: #FFFFFF;
           font-family: var(--font-body);
           font-weight: 700;
-          font-size: 15px;
+          font-size: 14px;
           cursor: pointer;
-          box-shadow: 0 0 28px rgba(203,255,0,0.45), 0 4px 14px rgba(203,255,0,0.22);
+          box-shadow: 0 0 28px rgba(95, 119, 0, 0.45), 0 4px 14px rgba(111, 138, 0, 0.22);
           transition: transform 150ms ease-out, box-shadow 150ms ease-out;
           overflow: hidden;
           text-align: center;
@@ -151,9 +172,9 @@ export default function HeroSection() {
           pointer-events: none;
         }
 
-        .sfs-btn:hover .sfs-btn-fill {
-          transform: translateX(0%);
-        }
+        // .sfs-btn:hover .sfs-btn-fill {
+        //   transform: translateX(0%);
+        // }
 
         .sfs-btn-label {
           position: relative;
@@ -164,12 +185,12 @@ export default function HeroSection() {
           gap: 8px;
           height: 100%;
           transition: color 420ms cubic-bezier(0.22, 1, 0.36, 1);
-          color: #1A1F2E;
+          color: #ffffffc6;
         }
 
-        .sfs-btn:hover .sfs-btn-label {
-          color: #CBFF00;
-        }
+        // .sfs-btn:hover .sfs-btn-label {
+        //   color: #CBFF00;
+        // }
 
         .sfs-btn-icon {
           display: inline-flex;
@@ -181,10 +202,10 @@ export default function HeroSection() {
             opacity 280ms ease-out 60ms;
         }
 
-        .sfs-btn:hover .sfs-btn-icon {
-          transform: translateX(0);
-          opacity: 1;
-        }
+        // .sfs-btn:hover .sfs-btn-icon {
+        //   transform: translateX(0);
+        //   opacity: 1;
+        // }
 
         .hero-content {
           position: absolute;
@@ -355,6 +376,7 @@ export default function HeroSection() {
 
           <div ref={ctaRef}>
             <button
+            disabled
               className="sfs-btn"
               onClick={() =>
                 window.open("https://weeztix.nl", "_blank", "noopener,noreferrer")
@@ -363,7 +385,7 @@ export default function HeroSection() {
             >
               <span className="sfs-btn-fill" aria-hidden="true" />
               <span className="sfs-btn-label">
-                Register now
+                Registration opens soon
                 <span className="sfs-btn-icon" aria-hidden="true">
                   <svg
                     width="15"
