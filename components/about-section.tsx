@@ -199,14 +199,7 @@ export default function AboutSection() {
                 margin: "0 0 20px",
               }}>
                 Serve for Smiles started from a simple idea: sport can connect people and create real
-                impact. Together with{" "}
-                <br/> 
-                 <strong style={{ color: "rgba(26,31,46,0.85)", fontWeight: 600 }}>
-                  <a href="https://collectivevents.nl/" target="_blank" rel="noopener noreferrer" className="link-effect-green">
-                    Padel x Housefest
-                  </a>
-                </strong>
-                 {""}, we&rsquo;re organising a unique padel event
+                impact. We&rsquo;re organising a unique padel event
                 where sport, music, community and purpose all come together in one place.
               </p>
 

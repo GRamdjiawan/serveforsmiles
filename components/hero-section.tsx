@@ -305,7 +305,7 @@ export default function HeroSection() {
               marginBottom: "14px",
             }}
           >
-            {"In collaboration with Padel \u00D7 House Fest"}
+            {"By students for students"}
           </div>
 
           <h1

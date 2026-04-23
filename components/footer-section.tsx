@@ -120,14 +120,6 @@ export default function FooterSection() {
               @serveforsmiles
             </a>
             {" · "}
-            <a
-              href="https://instagram.com/padelxhousefest"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="footer-ig-link"
-            >
-              @padelxhousefest
-            </a>
             <p
               style={{
                 fontFamily: "var(--font-body)",
@@ -137,7 +129,7 @@ export default function FooterSection() {
                 marginTop: "10px",
               }}
             >
-              In collaboration with Padel × House Fest
+              By students for students
             </p>
           </div>
         </div>
@@ -156,15 +148,6 @@ export default function FooterSection() {
             >
               @serveforsmiles
             </a>
-            {" · "}
-            <a
-              href="https://instagram.com/padelxhousefest"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="footer-ig-link"
-            >
-              @padelxhousefest
-            </a>
           </div>
           <p
             style={{
@@ -175,7 +158,7 @@ export default function FooterSection() {
               marginTop: "6px",
             }}
           >
-            In collaboration with Padel × House Fest
+            By Students for Students
           </p>
         </div>
 
