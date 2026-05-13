@@ -178,9 +178,9 @@ export default function AboutSection() {
                 textTransform: "uppercase",
                 letterSpacing: "0.08em",
               }}>
-                13 JUNE{" "}
+                28 JUNE{" "}
                 <span style={{ color: "#CBFF00" }}>·</span>{" "}
-                ROTTERDAM{" "}
+                ZWIJNDRECHT{" "}
                 <span style={{ color: "#CBFF00" }}>·</span>{" "}
                 PADEL &amp; NETWORK
               </div>

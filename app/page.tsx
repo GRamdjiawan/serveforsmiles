@@ -16,11 +16,11 @@ const eventJsonLd = {
   eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
   location: {
     "@type": "Place",
-    name: "Maashaven",
+    name: "Winkelhaak",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Maashaven 42",
-      addressLocality: "Rotterdam",
+      streetAddress: "Winkelhaak 11",
+      addressLocality: "Zwijndrecht",
       addressCountry: "NL",
     },
   },

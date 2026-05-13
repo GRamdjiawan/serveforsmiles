@@ -362,15 +362,15 @@ export default function HeroSection() {
             }}
           >
             <span style={{ fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "14px", color: "#fff" }}>
-              13 JUNE
+              28 JUNE
             </span>
             <span style={dotStyle} />
             <span style={{ fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "14px", color: "rgba(255,255,255,0.82)" }}>
-              Rotterdam
+              Zwijndrecht
             </span>
             <span style={dotStyle} />
             <span style={{ fontFamily: "var(--font-body)", fontWeight: 400, fontSize: "12px", color: "rgba(255,255,255,0.48)" }}>
-              Maashaven 42
+              Winkelhaak 11
             </span>
           </div>
 

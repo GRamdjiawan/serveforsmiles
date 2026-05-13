@@ -18,21 +18,20 @@ const dmSans = DM_Sans({
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://serveforsmiles.nl'
 
-const title = 'Serve for Smiles — Padel · Music · Purpose'
+const title = 'Serve for Smiles Padel · Music · Purpose'
 const description =
-  'A charity padel event in Rotterdam on 13 June 2025. Sport, music and community come together to support Stichting Jarige Job. Register now at Maashaven 42.'
+  'A charity padel event in Zwijndrecht on 28 June 2025. Sport, music and community come together to support Stichting Jarige Job. Register now at Winkelhaak 11.'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title,
   description,
   keywords: [
-    'padel event Rotterdam',
+    'padel event Zwijndrecht',
     'Serve for Smiles',
     'charity padel',
     'Stichting Jarige Job',
-    'Padel x House Fest',
-    'Maashaven Rotterdam',
+    'Winkelhaak Zwijndrecht',
   ],
   openGraph: {
     type: 'website',
@@ -45,7 +44,7 @@ export const metadata: Metadata = {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Serve for Smiles — Padel · Music · Purpose · 13 June Rotterdam',
+        alt: 'Serve for Smiles Padel · Music · Purpose · 28 June Zwijndrecht',
       },
     ],
     locale: 'en_NL',

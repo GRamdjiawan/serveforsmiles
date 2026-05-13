@@ -100,7 +100,7 @@ export default function FooterSection() {
               marginBottom: "16px",
             }}
           >
-            13 June · Rotterdam
+            13 June · Zwijndrecht
           </p>
 
           {/* Socials — mobile */}
